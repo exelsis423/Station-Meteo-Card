@@ -1,0 +1,7 @@
+{
+  "name": "station-meteo-card",
+  "content_in_root": false,
+  "render_readme": true,
+  "filename": "station-meteo-card.js",
+  "homeassistant": "2026.1.0"
+}
