@@ -86,15 +86,25 @@ class StationMeteoCard extends LitElement {
     }
 
     /* ===== MIN MAX ===== */
+    .mini-icon {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+        border-radius: 50%;
+        transition: background 0.3s;
+      }
+      
+    .mini-icon:hover {
+        background: rgba(255, 255, 255, 0.4);
+      }
+      
+      /* Ajustez la largeur de tempbox si besoin */
     .tempbox {
-      margin: 10px auto;
-      width: 180px;
-      text-align: center;
-      background: rgba(255,255,255,0.25);
-      border-radius: 12px;
-      padding: 8px;
-      border: 1px dashed rgba(0,0,0,0.2);
-    }
+        width: 90% !important; /* Un peu plus large pour laisser la place aux icônes */
+      }
+
     
     .windbox {
       display: grid;
@@ -312,17 +322,31 @@ class StationMeteoCard extends LitElement {
             Ressenti ${this.getState(c.feels_like)}°
           </div>
 
-          <!-- MIN/MAX -->
-          <div class="tempbox">
-            <div>${min}°</div>
-
-            <div class="bar">
-              <div class="cursor ${isBelow ? 'below' : ''} ${isAbove ? 'above' : ''}"
-                style="left:${percent}%"></div>
+          <!-- LIGNE MIN/MAX -->
+          <div class="tempbox" style="display: flex; align-items: center; justify-content: space-between;">
+  
+            <div class="mini-icon" @click=${() => this.handleTapAction('votre_entité_ou_id_popup')}>
+              <img src="/local/weather/test.png" style="width: 40px; height: 40px;">
             </div>
-
-            <div>${max}°</div>
+          
+            <div style="flex-grow: 1; margin: 0 10px;">
+              <div>${min}°</div>
+              <div class="bar">
+                <div class="cursor ${isBelow ? 'below' : ''} ${isAbove ? 'above' : ''}" 
+                     style="left:${percent}%"></div>
+              </div>
+              <div>${max}°</div>
+            </div>
+          
+            <div class="mini-icon" @click=${() => this.handleTapAction('votre_entité_ou_id_popup')}>
+              <ha-icon icon="mdi:radar"></ha-icon>
+            </div>
+          
           </div>
+          
+          
+          
+
 
           <!-- ROW -->
           <div class="row two">
