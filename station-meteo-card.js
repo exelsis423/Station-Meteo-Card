@@ -116,6 +116,7 @@ class StationMeteoCard extends LitElement {
         padding: 5px;
         border-radius: 50%;
         transition: background 0.3s;
+        font-size: 50px;
       }
       
     .mini-icon:hover {
@@ -341,7 +342,7 @@ class StationMeteoCard extends LitElement {
           <!-- LIGNE MIN/MAX -->
           <div class="header-row">
             <div class="mini-icon" @click=${() => this.handleTapAction(c.vigilance_action)}>
-              <img src="/api/camera_proxy/camera.mf_alerte_today?token=${this.hass.states['camera.mf_alerte_today']?.attributes.access_token}" style="width: 40px; height: 40px; border-radius: 50%;">
+              <img src="/api/camera_proxy/camera.mf_alerte_today?token=${this.hass.states['camera.mf_alerte_today']?.attributes.access_token}" style="width: 50px; height: 50px; border-radius: 50%;">
             </div>
           
             <div class="tempbox">
