@@ -341,7 +341,7 @@ class StationMeteoCard extends LitElement {
           <!-- LIGNE MIN/MAX -->
           <div class="header-row">
             <div class="mini-icon" @click=${() => this.handleTapAction(c.vigilance_action)}>
-              <img src="/local/weather/test.png" style="width: 40px; height: 40px;">
+              <img src="/api/camera_proxy/camera.mf_alerte_today?token=${this.hass.states['camera.mf_alerte_today']?.attributes.access_token}" style="width: 40px; height: 40px; border-radius: 50%;">
             </div>
           
             <div class="tempbox">
