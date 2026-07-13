@@ -102,7 +102,13 @@ class StationMeteoCard extends LitElement {
       
       /* Ajustez la largeur de tempbox si besoin */
     .tempbox {
-        width: 90% !important; /* Un peu plus large pour laisser la place aux icônes */
+        margin: 10px auto;
+        width: 180px;
+        text-align: center;
+        background: rgba(255,255,255,0.25);
+        border-radius: 12px;
+        padding: 8px;
+        border: 1px dashed rgba(0,0,0,0.2);
       }
 
     
