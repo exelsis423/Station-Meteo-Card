@@ -108,6 +108,10 @@ class StationMeteoCard extends LitElement {
         border: 1px dashed rgba(0,0,0,0.2);
       }
 
+    .mini-icon ha-icon {
+      --mdc-icon-size: 50px; /* Ajustez cette valeur selon la taille souhaitée */
+      color: #333;           /* Optionnel : pour changer la couleur de l'icône */
+      }
     .mini-icon {
         cursor: pointer;
         display: flex;
