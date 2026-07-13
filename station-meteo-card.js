@@ -304,7 +304,7 @@ class StationMeteoCard extends LitElement {
           <div class="top">
             <div class="icon"
                 style="cursor:pointer"
-                @click=${() => this.handleTapAction(c.weather)}>
+                @click=${() => this.handleTapAction(c.weather_action || { action: "more-info", entity: c.weather })}>
               ${this.getWeatherIcon(this.hass.states[c.weather]?.state)}
             </div>
           </div>
@@ -313,7 +313,7 @@ class StationMeteoCard extends LitElement {
           <div class="big ${this.getTempClass(temp)}"
                data-bg="88.8°"
                style="cursor:pointer"
-               @click=${() => this.handleTapAction(c.temperature)}>
+               @click=${() => this.handleTapAction(c.temperature_action || { action: "more-info", entity: c.temperature })}>
 
             <span>${temp}°</span>
           </div>
@@ -325,7 +325,7 @@ class StationMeteoCard extends LitElement {
           <!-- LIGNE MIN/MAX -->
           <div class="tempbox" style="display: flex; align-items: center; justify-content: space-between;">
   
-            <div class="mini-icon" @click=${() => this.handleTapAction('votre_entité_ou_id_popup')}>
+            <div class="mini-icon" @click=${() => this.handleTapAction(c.vigilance_action || { action: "more-info", entity: c.temperature })}>
               <img src="/local/weather/test.png" style="width: 40px; height: 40px;">
             </div>
           
@@ -338,7 +338,7 @@ class StationMeteoCard extends LitElement {
               <div>${max}°</div>
             </div>
           
-            <div class="mini-icon" @click=${() => this.handleTapAction('votre_entité_ou_id_popup')}>
+            <div class="mini-icon" @click=${() => this.handleTapAction(c.radar_action || { action: "more-info", entity: c.temperature })}>
               <ha-icon icon="mdi:radar"></ha-icon>
             </div>
           
