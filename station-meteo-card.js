@@ -86,6 +86,28 @@ class StationMeteoCard extends LitElement {
     }
 
     /* ===== MIN MAX ===== */
+
+      
+      /* Ajustez la largeur de tempbox si besoin */
+
+    .header-row {
+      display: flex;
+      align-items: center; /* Aligne verticalement au centre */
+      justify-content: center; /* Espace équitablement les éléments */
+      gap: 15px; /* Espace entre les icônes et la tempbox */
+      margin: 10px 0;
+      }
+      
+    .tempbox {
+        margin: 0 !important;
+        width: 180px;
+        text-align: center;
+        background: rgba(255,255,255,0.25);
+        border-radius: 12px;
+        padding: 8px;
+        border: 1px dashed rgba(0,0,0,0.2);
+      }
+
     .mini-icon {
         cursor: pointer;
         display: flex;
@@ -99,18 +121,6 @@ class StationMeteoCard extends LitElement {
     .mini-icon:hover {
         background: rgba(255, 255, 255, 0.4);
       }
-      
-      /* Ajustez la largeur de tempbox si besoin */
-    .tempbox {
-        margin: 10px auto;
-        width: 180px;
-        text-align: center;
-        background: rgba(255,255,255,0.25);
-        border-radius: 12px;
-        padding: 8px;
-        border: 1px dashed rgba(0,0,0,0.2);
-      }
-
     
     .windbox {
       display: grid;
@@ -329,13 +339,12 @@ class StationMeteoCard extends LitElement {
           </div>
 
           <!-- LIGNE MIN/MAX -->
-          <div class="tempbox" style="display: flex; align-items: center; justify-content: space-between;">
-  
-            <div class="mini-icon" @click=${() => this.handleTapAction(c.vigilance_action || { action: "more-info", entity: c.temperature })}>
+          <div class="header-row">
+            <div class="mini-icon" @click=${() => this.handleTapAction(c.vigilance_action)}>
               <img src="/local/weather/test.png" style="width: 40px; height: 40px;">
             </div>
           
-            <div style="flex-grow: 1; margin: 0 10px;">
+            <div class="tempbox">
               <div>${min}°</div>
               <div class="bar">
                 <div class="cursor ${isBelow ? 'below' : ''} ${isAbove ? 'above' : ''}" 
@@ -344,12 +353,10 @@ class StationMeteoCard extends LitElement {
               <div>${max}°</div>
             </div>
           
-            <div class="mini-icon" @click=${() => this.handleTapAction(c.radar_action || { action: "more-info", entity: c.temperature })}>
+            <div class="mini-icon" @click=${() => this.handleTapAction(c.radar_action)}>
               <ha-icon icon="mdi:radar"></ha-icon>
             </div>
-          
-          </div>
-          
+          </div>          
           
           
 
