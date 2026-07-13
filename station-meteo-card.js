@@ -116,7 +116,8 @@ class StationMeteoCard extends LitElement {
         padding: 5px;
         border-radius: 50%;
         transition: background 0.3s;
-        font-size: 50px;
+        width: 50px;  /* Assurez-vous que la largeur est suffisante */
+        height: 50px;
       }
       
     .mini-icon:hover {
