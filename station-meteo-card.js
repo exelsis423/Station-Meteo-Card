@@ -312,13 +312,17 @@ class StationMeteoCard extends LitElement {
   
   getVigilanceColor(entityId) {
     const state = this.hass.states[entityId]?.state;
-    const map = {
-      'green': '#2ecc71', 'vert': '#2ecc71', 'Vert': '#2ecc71',
-      'yellow': '#f1c40f', 'jaune': '#f1c40f', 'Jaune': '#f1c40f',
-      'orange': '#e67e22', 'Orange': '#e67e22',
-      'red': '#e74c3c', 'rouge': '#e74c3c', 'Rouge': '#e74c3c'
-    };
-    return map[state] || '#bdc3c7'; // Gris par défaut
+    if (!state) return '#bdc3c7'; 
+
+    // Convertit en minuscules pour comparer sans se soucier de la casse
+    const s = state.toString().toLowerCase().trim();
+    
+    if (['green', 'vert'].includes(s)) return '#2ecc71';
+    if (['yellow', 'jaune'].includes(s)) return '#f1c40f';
+    if (['orange'].includes(s)) return '#e67e22';
+    if (['red', 'rouge'].includes(s)) return '#e74c3c';
+    
+    return '#bdc3c7'; 
   }
   
   getNextRainText(entityId) {
@@ -432,7 +436,7 @@ class StationMeteoCard extends LitElement {
               <div class="mini-icon" @click=${() => this.handleTapAction(c.vigilance_action)}>
                 <img src="/api/camera_proxy/camera.mf_alerte_today?token=${this.hass.states['camera.mf_alerte_today']?.attributes.access_token}" style="width: 64px !important; height: 64px !important; border-radius: 50%;">
               </div>
-              <div class="vigilance-dot" style="background-color: ${this.getVigilanceColor(vigi)};"></div>
+              <div class="vigilance-dot" style="background-color: ${this.getVigilanceColor(c.vigilance)};"></div>
             </div>
           
             <div class="tempbox">
