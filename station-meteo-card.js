@@ -74,7 +74,6 @@ class StationMeteoCard extends LitElement {
     
     .rain-info {
       font-size: 14px;
-      font-weight: bold;
       opacity: 0.8;
       color: #111;
     }
