@@ -280,16 +280,24 @@ class StationMeteoCard extends LitElement {
     return map[state] || "C";
   }
 
-  getNextRain(entityId) {
+  getNextRainText(entityId) {
     const entity = this.hass.states[entityId];
-    // Vérification de l'existence de l'entité et de l'attribut spécifique
     if (!entity || !entity.attributes || !entity.attributes["1_hour_forecast"]) {
       return "N/A";
     }
+  
+    const forecast = entity.attributes["1_hour_forecast"];
+    const minutes = Object.keys(forecast);
     
-    // On accède au dictionnaire 1_hour_forecast, puis à la clé "0 min"
-    return entity.attributes["1_hour_forecast"]["0 min"] || "N/A";
+    // On cherche la première occurrence de pluie
+    for (const min of minutes) {
+      if (forecast[min] !== "Temps sec") {
+        return `Pluie dans ${min.replace(" min", "")} min`;
+      }
     }
+    
+    return "Temps sec";
+  }
 
   /* ===== GRAPH ===== */
   async showGraph(name, entity) {
@@ -367,8 +375,8 @@ class StationMeteoCard extends LitElement {
           </div>
 
           <div class="info-row">
-            <div class="rain-info">
-              ☔ ${this.getNextRain(c.next_rain_entity)}
+            <div class="rain-info" @click=${() => this.handleTapAction(c.rain)}>
+              ☔ ${this.getNextRainText(c.next_rain_entity)}
             </div>
             <div class="feels">
               Ressenti ${this.getState(c.feels_like)}°
