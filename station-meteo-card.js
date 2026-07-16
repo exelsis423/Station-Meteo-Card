@@ -63,7 +63,22 @@ class StationMeteoCard extends LitElement {
     .big span {
       grid-area: 1 / 1;
     }
-
+    
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10px; /* Un peu de marge interne pour aligner avec le reste */
+      margin-top: 5px;
+    }
+    
+    .rain-info {
+      font-size: 14px;
+      font-weight: bold;
+      opacity: 0.8;
+      color: #111;
+    }
+    
     .feels {
       text-align: right;
       font-size: 14px;
@@ -265,6 +280,14 @@ class StationMeteoCard extends LitElement {
     return map[state] || "C";
   }
 
+  getNextRain(entityId) {
+  const entity = this.hass.states[entityId];
+  if (!entity || !entity.attributes.forecast) return "Inconnu";
+  
+  // On récupère la valeur de la clé "0 min"
+  return entity.attributes.forecast["0 min"] || "Inconnu";
+  }
+
   /* ===== GRAPH ===== */
   async showGraph(name, entity) {
 
@@ -340,8 +363,13 @@ class StationMeteoCard extends LitElement {
             <span>${temp}°</span>
           </div>
 
-          <div class="feels">
-            Ressenti ${this.getState(c.feels_like)}°
+          <div class="info-row">
+            <div class="rain-info">
+              ☔ ${this.getNextRain(c.next_rain_entity)}
+            </div>
+            <div class="feels">
+              Ressenti ${this.getState(c.feels_like)}°
+            </div>
           </div>
 
           <!-- LIGNE MIN/MAX -->
