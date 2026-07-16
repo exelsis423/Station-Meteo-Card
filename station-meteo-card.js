@@ -121,8 +121,8 @@ class StationMeteoCard extends LitElement {
       position: absolute;
       top: 0;
       right: 0;
-      width: 18px;
-      height: 18px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
       border: 3px solid #dfeaf5;
       box-shadow: 0 0 5px rgba(0,0,0,0.3);
@@ -313,10 +313,10 @@ class StationMeteoCard extends LitElement {
   getVigilanceColor(entityId) {
     const state = this.hass.states[entityId]?.state;
     const map = {
-      'green': '#2ecc71', 'vert': '#2ecc71',
-      'yellow': '#f1c40f', 'jaune': '#f1c40f',
-      'orange': '#e67e22',
-      'red': '#e74c3c', 'rouge': '#e74c3c'
+      'green': '#2ecc71', 'vert': '#2ecc71', 'Vert': '#2ecc71',
+      'yellow': '#f1c40f', 'jaune': '#f1c40f', 'Jaune': '#f1c40f',
+      'orange': '#e67e22', 'Orange': '#e67e22',
+      'red': '#e74c3c', 'rouge': '#e74c3c', 'Rouge': '#e74c3c'
     };
     return map[state] || '#bdc3c7'; // Gris par défaut
   }
@@ -385,6 +385,7 @@ class StationMeteoCard extends LitElement {
     const temp = this.getState(c.temperature);
     const min = parseFloat(this.getState(c.temp_min));
     const max = parseFloat(this.getState(c.temp_max));
+    const vigi = this.getState(c.vigilance);
 
     let percent = ((temp - min) / (max - min || 1)) * 100;
 
@@ -430,7 +431,7 @@ class StationMeteoCard extends LitElement {
               <div class="mini-icon" @click=${() => this.handleTapAction(c.vigilance_action)}>
                 <img src="/api/camera_proxy/camera.mf_alerte_today?token=${this.hass.states['camera.mf_alerte_today']?.attributes.access_token}" style="width: 64px !important; height: 64px !important; border-radius: 50%;">
               </div>
-              <div class="vigilance-dot" style="background-color: ${this.getVigilanceColor('sensor.68_weather_alert')};"></div>
+              <div class="vigilance-dot" style="background-color: ${this.getVigilanceColor(vigi)};"></div>
             </div>
           
             <div class="tempbox">
