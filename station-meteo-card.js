@@ -386,7 +386,6 @@ class StationMeteoCard extends LitElement {
   render() {
 
     const c = this.config;
-    console.log("DEBUG Vigilance - ID:", c.vigilance, "Valeur brute:", this.hass.states[c.vigilance]?.state);
     const temp = this.getState(c.temperature);
     const min = parseFloat(this.getState(c.temp_min));
     const max = parseFloat(this.getState(c.temp_max));
