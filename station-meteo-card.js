@@ -122,7 +122,25 @@ class StationMeteoCard extends LitElement {
         padding: 8px;
         border: 1px dashed rgba(0,0,0,0.2);
       }
-
+    .vigilance-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+      transition: background-color 0.5s ease;
+    }
+    
+    /* Optionnel : pulsation si alerte orange ou rouge */
+    .vigilance-dot.alert {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
+      70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+    }
     .mini-icon ha-icon {
       --mdc-icon-size: 50px; /* Ajustez cette valeur selon la taille souhaitée */
       color: #333;           /* Optionnel : pour changer la couleur de l'icône */
@@ -279,7 +297,18 @@ class StationMeteoCard extends LitElement {
     };
     return map[state] || "C";
   }
-
+  
+  getVigilanceColor(entityId) {
+    const state = this.hass.states[entityId]?.state;
+    const map = {
+      'green': '#2ecc71',
+      'yellow': '#f1c40f',
+      'orange': '#e67e22',
+      'red': '#e74c3c'
+    };
+    return map[state] || '#a8c8e8'; // Couleur par défaut si rien
+  }
+  
   getNextRainText(entityId) {
     const entity = this.hass.states[entityId];
     if (!entity || !entity.attributes || !entity.attributes["1_hour_forecast"]) {
@@ -377,6 +406,10 @@ class StationMeteoCard extends LitElement {
           <div class="info-row">
             <div class="rain-info" @click=${() => this.handleTapAction(c.rain)}>
               ☔ ${this.getNextRainText(c.next_rain_entity)}
+            </div>
+            <div class="vigilance-dot" 
+                 style="background-color: ${this.getVigilanceColor('sensor.68_weather_alert')};"
+                 title="Vigilance">
             </div>
             <div class="feels">
               Ressenti ${this.getState(c.feels_like)}°
