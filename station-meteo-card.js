@@ -312,6 +312,7 @@ class StationMeteoCard extends LitElement {
   
   getVigilanceColor(entityId) {
     const state = this.hass.states[entityId]?.state;
+    const status = state.toString().toLowerCase().trim();
     const map = {
       'green': '#2ecc71', 'vert': '#2ecc71', 'Vert': '#2ecc71',
       'yellow': '#f1c40f', 'jaune': '#f1c40f', 'Jaune': '#f1c40f',
