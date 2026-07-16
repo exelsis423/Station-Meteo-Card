@@ -386,6 +386,7 @@ class StationMeteoCard extends LitElement {
     const min = parseFloat(this.getState(c.temp_min));
     const max = parseFloat(this.getState(c.temp_max));
     const vigi = this.getState(c.vigilance);
+    const vigi_pic = this.getState(c.vigilance_carte);
 
     let percent = ((temp - min) / (max - min || 1)) * 100;
 
@@ -429,7 +430,7 @@ class StationMeteoCard extends LitElement {
           <div class="header-row">
             <div class="vigilance-group">
               <div class="mini-icon" @click=${() => this.handleTapAction(c.vigilance_action)}>
-                <img src="/api/camera_proxy/camera.mf_alerte_today?token=${this.hass.states['camera.mf_alerte_today']?.attributes.access_token}" style="width: 64px !important; height: 64px !important; border-radius: 50%;">
+                ${this.getState(c.vigi_pic)}
               </div>
               <div class="vigilance-dot" style="background-color: ${this.getVigilanceColor(vigi)};"></div>
             </div>
