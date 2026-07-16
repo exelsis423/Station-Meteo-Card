@@ -430,7 +430,9 @@ class StationMeteoCard extends LitElement {
           <div class="header-row">
             <div class="vigilance-group">
               <div class="mini-icon" @click=${() => this.handleTapAction(c.vigilance_action)}>
-                <img src="${this.hass.states[c.vigi_pic]?.attributes.entity_picture}" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                ${this.hass.states[c.vigi_pic]?.attributes?.entity_picture 
+                  ? html`<img src="${this.hass.states[c.vigi_pic].attributes.entity_picture}" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">`
+                  : html`<ha-icon icon="mdi:alert-circle-outline"></ha-icon>`}
               </div>
               <div class="vigilance-dot" style="background-color: ${this.getVigilanceColor(vigi)};"></div>
             </div>
