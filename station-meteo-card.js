@@ -386,6 +386,7 @@ class StationMeteoCard extends LitElement {
     const min = parseFloat(this.getState(c.temp_min));
     const max = parseFloat(this.getState(c.temp_max));
     const vigi = this.getState(c.vigilance);
+    console.log("Valeur de vigi :", vigi);
     const vigi_pic = this.getState(c.vigilance_carte);
 
     let percent = ((temp - min) / (max - min || 1)) * 100;
