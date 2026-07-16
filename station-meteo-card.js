@@ -100,11 +100,7 @@ class StationMeteoCard extends LitElement {
       font-size: 110px;
     }
 
-    /* ===== MIN MAX ===== */
-
-      
-      /* Ajustez la largeur de tempbox si besoin */
-
+    /* ===== HEADER ROW (Vigilance/Tempbox/Radar) ===== */
     .header-row {
       display: flex;
       align-items: center; /* Aligne verticalement au centre */
@@ -112,25 +108,27 @@ class StationMeteoCard extends LitElement {
       gap: 15px; /* Espace entre les icônes et la tempbox */
       margin: 10px 0;
       }
-      
-    .tempbox {
-        margin: 0 !important;
-        width: 180px;
-        text-align: center;
-        background: rgba(255,255,255,0.25);
-        border-radius: 12px;
-        padding: 8px;
-        border: 1px dashed rgba(0,0,0,0.2);
-      }
-    .vigilance-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      border: 1px solid rgba(0,0,0,0.1);
-      box-shadow: 0 0 5px rgba(0,0,0,0.2);
-      transition: background-color 0.5s ease;
+    .vigilance-group {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
     }
-    
+  
+    .vigilance-dot {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 3px solid #dfeaf5;
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
+      pointer-events: none;
+    }
+
     /* Optionnel : pulsation si alerte orange ou rouge */
     .vigilance-dot.alert {
       animation: pulse 2s infinite;
@@ -141,10 +139,17 @@ class StationMeteoCard extends LitElement {
       70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
       100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
     }
-    .mini-icon ha-icon {
-      --mdc-icon-size: 50px; /* Ajustez cette valeur selon la taille souhaitée */
-      color: #333;           /* Optionnel : pour changer la couleur de l'icône */
+
+    .tempbox {
+        margin: 0 !important;
+        width: 180px;
+        text-align: center;
+        background: rgba(255,255,255,0.25);
+        border-radius: 12px;
+        padding: 8px;
+        border: 1px dashed rgba(0,0,0,0.2);
       }
+
     .mini-icon {
         cursor: pointer;
         display: flex;
@@ -156,20 +161,18 @@ class StationMeteoCard extends LitElement {
         width: 50px !important;  /* Assurez-vous que la largeur est suffisante */
         height: 50px !important;
       }
-      
+
+    .mini-icon ha-icon {
+      --mdc-icon-size: 50px; /* Ajustez cette valeur selon la taille souhaitée */
+      color: #333;           /* Optionnel : pour changer la couleur de l'icône */
+      }
+
     .mini-icon:hover {
         background: rgba(255, 255, 255, 0.4);
       }
     
-    .windbox {
-      display: grid;
-      text-align: center;
-      align-items: center;
-      padding: 1px;
-      border-radius: 12px;
-      grid-template-columns: 1fr 1fr;
-    }
-    
+
+    /* ===== BAR & CURSOR ===== */
     .bar {
       height: 6px;
       background: linear-gradient(to right, #4aa3ff, #fff, #ff3b3b);
@@ -197,7 +200,7 @@ class StationMeteoCard extends LitElement {
       background: #ff3b3b;
     }
 
-    /* ===== ROWS ===== */
+    /* ===== ROWS & CELLS ===== */
     .row {
       display: grid;
       padding: 10px 0;
@@ -244,6 +247,15 @@ class StationMeteoCard extends LitElement {
        cursor: pointer;
     }
 
+    .windbox {
+      display: grid;
+      text-align: center;
+      align-items: center;
+      padding: 1px;
+      border-radius: 12px;
+      grid-template-columns: 1fr 1fr;
+    }
+    
     /* ===== COMPASS ===== */
     .compass {
       width: 60px;
@@ -301,12 +313,12 @@ class StationMeteoCard extends LitElement {
   getVigilanceColor(entityId) {
     const state = this.hass.states[entityId]?.state;
     const map = {
-      'green': '#2ecc71',
-      'yellow': '#f1c40f',
+      'green': '#2ecc71', 'vert': '#2ecc71',
+      'yellow': '#f1c40f', 'jaune': '#f1c40f',
       'orange': '#e67e22',
-      'red': '#e74c3c'
+      'red': '#e74c3c', 'rouge': '#e74c3c'
     };
-    return map[state] || '#a8c8e8'; // Couleur par défaut si rien
+    return map[state] || '#bdc3c7'; // Gris par défaut
   }
   
   getNextRainText(entityId) {
@@ -407,10 +419,6 @@ class StationMeteoCard extends LitElement {
             <div class="rain-info" @click=${() => this.handleTapAction(c.rain)}>
               ☔ ${this.getNextRainText(c.next_rain_entity)}
             </div>
-            <div class="vigilance-dot" 
-                 style="background-color: ${this.getVigilanceColor('sensor.68_weather_alert')};"
-                 title="Vigilance">
-            </div>
             <div class="feels">
               Ressenti ${this.getState(c.feels_like)}°
             </div>
@@ -418,8 +426,11 @@ class StationMeteoCard extends LitElement {
 
           <!-- LIGNE MIN/MAX -->
           <div class="header-row">
-            <div class="mini-icon" @click=${() => this.handleTapAction(c.vigilance_action)}>
-              <img src="/api/camera_proxy/camera.mf_alerte_today?token=${this.hass.states['camera.mf_alerte_today']?.attributes.access_token}" style="width: 64px !important; height: 64px !important; border-radius: 50%;">
+            <div class="vigilance-group">
+              <div class="mini-icon" @click=${() => this.handleTapAction(c.vigilance_action)}>
+                <img src="/api/camera_proxy/camera.mf_alerte_today?token=${this.hass.states['camera.mf_alerte_today']?.attributes.access_token}" style="width: 64px !important; height: 64px !important; border-radius: 50%;">
+              </div>
+              <div class="vigilance-dot" style="background-color: ${this.getVigilanceColor('sensor.68_weather_alert')};"></div>
             </div>
           
             <div class="tempbox">
