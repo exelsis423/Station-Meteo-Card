@@ -281,15 +281,15 @@ class StationMeteoCard extends LitElement {
   }
 
   getNextRain(entityId) {
-  const entity = this.hass.states[entityId];
-  // Vérification de l'existence de l'entité et de l'attribut spécifique
-  if (!entity || !entity.attributes || !entity.attributes["1_hour_forecast"]) {
-    return "N/A";
-  }
-  
-  // On accède au dictionnaire 1_hour_forecast, puis à la clé "0 min"
-  return entity.attributes["1_hour_forecast"]["0 min"] || "N/A";
-  }
+    const entity = this.hass.states[entityId];
+    // Vérification de l'existence de l'entité et de l'attribut spécifique
+    if (!entity || !entity.attributes || !entity.attributes["1_hour_forecast"]) {
+      return "N/A";
+    }
+    
+    // On accède au dictionnaire 1_hour_forecast, puis à la clé "0 min"
+    return entity.attributes["1_hour_forecast"]["0 min"] || "N/A";
+    }
 
   /* ===== GRAPH ===== */
   async showGraph(name, entity) {
