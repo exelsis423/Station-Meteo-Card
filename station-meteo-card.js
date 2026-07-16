@@ -430,7 +430,7 @@ class StationMeteoCard extends LitElement {
           <div class="header-row">
             <div class="vigilance-group">
               <div class="mini-icon" @click=${() => this.handleTapAction(c.vigilance_action)}>
-                ${this.getState(c.vigi_pic)}
+                <img src="${this.hass.states[c.vigi_pic]?.attributes.entity_picture}" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
               </div>
               <div class="vigilance-dot" style="background-color: ${this.getVigilanceColor(vigi)};"></div>
             </div>
@@ -488,13 +488,13 @@ class StationMeteoCard extends LitElement {
               </div>
 
               <div class="windbox">
-                <div class="value"
+                <div class="value">
                   <span @click=${() => this.handleTapAction(c.wind)}>
                     ${this.getState(c.wind)}
                   </span>
                 </div>
                 
-                <div class="gust"
+                <div class="gust">
                   <span @click=${() => this.handleTapAction(c.gust)}>
                     ${this.getState(c.gust)}
                   </span>
