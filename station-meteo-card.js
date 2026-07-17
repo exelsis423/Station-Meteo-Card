@@ -120,8 +120,8 @@ class StationMeteoCard extends LitElement {
       position: absolute;
       top: 0;
       right: 0;
-      width: 14px;
-      height: 14px;
+      width: 11px;
+      height: 11px;
       border-radius: 50%;
       border: 3px solid #dfeaf5;
       box-shadow: 0 0 5px rgba(0,0,0,0.3);
@@ -341,25 +341,6 @@ class StationMeteoCard extends LitElement {
     }
     
     return "Temps sec";
-  }
-
-  /* ===== GRAPH ===== */
-  async showGraph(name, entity) {
-
-    this.graphEntity = name;
-
-    const end = new Date();
-    const start = new Date(end.getTime() - 24 * 60 * 60 * 1000);
-
-    const data = await this.hass.callWS({
-      type: "history/history_during_period",
-      start_time: start.toISOString(),
-      end_time: end.toISOString(),
-      entity_ids: [entity],
-      minimal_response: true
-    });
-
-    this.historyData = data[entity] || [];
   }
 
 
