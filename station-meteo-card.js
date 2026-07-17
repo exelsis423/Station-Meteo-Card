@@ -36,10 +36,10 @@ class StationMeteoCard extends LitElement {
       --temp-color: #111;
     }
 
-    .temp-cold { --temp-color: #4aa3ff; }
-    .temp-good { --temp-color: #111; }
-    .temp-warm { --temp-color: #ff9a3c; }
-    .temp-hot  { --temp-color: #ff3b3b; }
+    .temp-cold { --temp-color: #00BFFF; }
+    .temp-good { --temp-color: #B0C4DE; }
+    .temp-warm { --temp-color: #FFD700; }
+    .temp-hot  { --temp-color: #FF0000; }
   
     .big {
       display: grid;
@@ -280,9 +280,9 @@ class StationMeteoCard extends LitElement {
 
   getTempClass(temp) {
     const t = parseFloat(temp);
-    if (t <= 5) return "temp-cold";
-    if (t <= 20) return "temp-good";
-    if (t <= 25) return "temp-warm";
+    if (t <= 10) return "temp-cold";
+    if (t <= 23) return "temp-good";
+    if (t <= 28) return "temp-warm";
     return "temp-hot";
   }
 
