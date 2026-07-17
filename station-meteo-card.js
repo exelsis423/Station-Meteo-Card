@@ -316,10 +316,10 @@ class StationMeteoCard extends LitElement {
     // Convertit en minuscules pour comparer sans se soucier de la casse
     const s = state.toString().toLowerCase().trim();
     
-    if (['green', 'vert'].includes(s)) return '#2ecc71';
-    if (['yellow', 'jaune'].includes(s)) return '#f1c40f';
-    if (['orange'].includes(s)) return '#e67e22';
-    if (['red', 'rouge'].includes(s)) return '#e74c3c';
+    if (['green', 'vert'].includes(s)) return '#008000';
+    if (['yellow', 'jaune'].includes(s)) return '#FFFF00';
+    if (['orange'].includes(s)) return '#FFA500';
+    if (['red', 'rouge'].includes(s)) return '#FF0000';
     
     return '#bdc3c7'; 
   }
