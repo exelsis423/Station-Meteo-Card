@@ -37,9 +37,10 @@ class StationMeteoCard extends LitElement {
     }
 
     .temp-cold { --temp-color: #00BFFF; }
-    .temp-good { --temp-color: #3CB371; }
-    .temp-warm { --temp-color: #FFD700; }
+    .temp-good { --temp-color: #008000; }
+    .temp-warm { --temp-color: #FF8C00; }
     .temp-hot  { --temp-color: #FF0000; }
+
   
     .big {
       display: grid;
