@@ -18,8 +18,8 @@ class StationMeteoCard extends LitElement {
     ha-card {
       border-radius: 20px;
       overflow: hidden;
-      border: none !important;
-      box-shadow: none !important;
+      border: none 1px rgba(0,0,0,0.4) outset;
+      box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5) !important;
     }
 
     .screen {
