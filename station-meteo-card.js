@@ -18,8 +18,7 @@ class StationMeteoCard extends LitElement {
     ha-card {
       border-radius: 20px;
       overflow: hidden;
-      border: 1px rgba(0,0,0,0.4) outset;
-      box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5) !important;
+      border: none;
     }
 
     .screen {
@@ -29,7 +28,8 @@ class StationMeteoCard extends LitElement {
       padding: 15px;
       border-radius: 20px;
       background: linear-gradient(#a8c8e8 0%, #dfeaf5 55%, #7fb3d5 100%);
-    }
+      border: 1px rgba(0,0,0,0.4) outset;
+      box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5) !important;    }
 
     /* ===== TEMP STYLE ===== */
     :host {
