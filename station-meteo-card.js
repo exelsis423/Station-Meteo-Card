@@ -289,8 +289,8 @@ class StationMeteoCard extends LitElement {
 
  getTempFont(temp) {
     const t = parseFloat(temp);
-    if (t <= 10) return "8.8";
-    return "88.8";
+    if (t <= 10) return "8.8°";
+    return "88.8°";
   }
   getWeatherIcon(state) {
     const map = {
