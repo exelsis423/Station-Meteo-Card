@@ -19,8 +19,6 @@ class StationMeteoCard extends LitElement {
       border-radius: 20px;
       overflow: hidden;
       border: none;
-      height: auto !important;
-      min-height: 600 !important;
     }
 
     .screen {
@@ -38,8 +36,6 @@ class StationMeteoCard extends LitElement {
     :host {
       --temp-color: #111;
       display: block;
-      height: auto !important;
-      min-height: 600 !important;
     }
 
     .temp-cold { --temp-color: #00BFFF; }
