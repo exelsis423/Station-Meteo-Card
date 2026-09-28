@@ -20,7 +20,7 @@ class StationMeteoCard extends LitElement {
       overflow: hidden;
       border: none;
       height: auto !important;
-      min-height: 0 !important;
+      min-height: 600 !important;
     }
 
     .screen {
