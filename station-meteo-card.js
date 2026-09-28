@@ -39,6 +39,7 @@ class StationMeteoCard extends LitElement {
       --temp-color: #111;
       display: block;
       height: auto !important;
+      min-height: 600 !important;
     }
 
     .temp-cold { --temp-color: #00BFFF; }
