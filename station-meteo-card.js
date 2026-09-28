@@ -19,13 +19,15 @@ class StationMeteoCard extends LitElement {
       border-radius: 20px;
       overflow: hidden;
       border: none;
+      line-height: inherit;
+      box-sizing: content-box;
     }
 
     .screen {
       position: relative;
       max-width: 500px;
-      box-sizing: content-box;
-      line-height: inherit;
+      
+      
       margin: 0 auto;
       padding: 15px;
       border-radius: 20px;
