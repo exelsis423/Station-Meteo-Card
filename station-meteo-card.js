@@ -16,23 +16,23 @@ class StationMeteoCard extends LitElement {
   static styles = css`
 
     ha-card {
-      border-radius: 20px;
-      overflow: hidden;
-      border: none;
-      line-height: inherit;
-      box-sizing: content-box;
+      border-radius: 20px !important;
+      overflow: hidden !important;
+      border: none !important;
+      line-height: inherit !important;
+      box-sizing: content-box !important;
     }
 
     .screen {
-      position: relative;
-      max-width: 500px;
+      position: relative !important;
+      max-width: 500px !important;
       
       
-      margin: 0 auto;
-      padding: 15px;
-      border-radius: 20px;
-      background: linear-gradient(#a8c8e8 0%, #dfeaf5 55%, #7fb3d5 100%);
-      border: 1px rgba(0,0,0,0.4) outset;
+      margin: 0 auto !important;
+      padding: 15px !important;
+      border-radius: 20px !important;
+      background: linear-gradient(#a8c8e8 0%, #dfeaf5 55%, #7fb3d5 100%) !important;
+      border: 1px rgba(0,0,0,0.4) outset !important;
       box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5) !important;    }
 
     /* ===== TEMP STYLE ===== */
