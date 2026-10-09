@@ -19,8 +19,6 @@ class StationMeteoCard extends LitElement {
       border-radius: 20px !important;
       overflow: hidden !important;
       border: none !important;
-      line-height: inherit !important;
-      box-sizing: content-box !important;
     }
 
     .screen {
@@ -33,12 +31,15 @@ class StationMeteoCard extends LitElement {
       border-radius: 20px !important;
       background: linear-gradient(#a8c8e8 0%, #dfeaf5 55%, #7fb3d5 100%) !important;
       border: 1px rgba(0,0,0,0.4) outset !important;
-      box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5) !important;    }
+      box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5) !important;
+      line-height: 1.2; /* Remet une hauteur de ligne propre pour votre carte */
+      }
 
     /* ===== TEMP STYLE ===== */
     :host {
       --temp-color: #111;
       display: block;
+      line-height: initial; /* Bloque l'héritage de Bubble Card */
     }
 
     .temp-cold { --temp-color: #00BFFF; }
