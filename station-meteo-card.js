@@ -14,11 +14,6 @@ class StationMeteoCard extends LitElement {
   }
 
   static styles = css`
-    /* Force l'annulation de l'héritage de Bubble Card sur TOUS les éléments de la carte */
-    * {
-      line-height: 1.2 !important;
-    }
-    
     ha-card {
       border-radius: 20px !important;
       overflow: hidden !important;
