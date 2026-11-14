@@ -291,10 +291,16 @@ class StationMeteoCard extends LitElement {
   }
 
  getTempFont(temp) {
-    const t = parseFloat(temp);
-    if (t <= 10) return "8.8°";
-    return "88.8°";
+  const t = parseFloat(temp);
+  if (isNaN(t)) return "88.8°";
+
+  if (t < 0) {
+    // négatif : "-" + 1 ou 2 chiffres
+    return Math.abs(t) < 10 ? "-8.8°" : "-88.8°";
   }
+  return t < 10 ? "8.8°" : "88.8°";
+  }
+ 
   getWeatherIcon(state) {
     const map = {
       clear: "1",
